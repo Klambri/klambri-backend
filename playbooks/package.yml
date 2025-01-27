@@ -1,0 +1,12 @@
+---
+- name: Package example
+  hosts: all
+  tasks:
+    - name: Debug
+      ansible.builtin.debug:
+        var: package
+
+    - name: Package example
+      ansible.builtin.package:
+        name: "{{ package }}"
+        state: present
