@@ -6,8 +6,7 @@ import (
 )
 
 func Playbook(rg *gin.RouterGroup) {
-	rg.GET("/", handlers.GetPlaybook)
+	rg.GET("/getall", handlers.GetAllPlaybooks)
 	rg.POST("/upload", handlers.UploadPlaybook)
-	rg.DELETE("/", handlers.DeletePlaybook)
-	rg.PUT("/", handlers.UpdatePlaybook)
+	rg.DELETE("/delete/name/:name", handlers.DeletePlaybook)
 }

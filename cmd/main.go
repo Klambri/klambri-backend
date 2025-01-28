@@ -13,6 +13,12 @@ import (
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
+// @title Klambri WebAPI
+// @version 1.0
+// @description ...
+
+// @host localhost:8080
+// @BasePath /api/v1
 func main() {
 	config, err := configuration.ReadConfig("config/config.yaml")
 	if err != nil {
@@ -29,7 +35,7 @@ func main() {
 		routes.User(v1.Group("/user"))
 
 		//Ansible routes
-		routes.Playbook(v1.Group("playbook"))
+		routes.Playbook(v1.Group("/playbook"))
 	}
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))

@@ -17,8 +17,8 @@ create-venv:
 	$(CURDIR)/scripts/create-venv.sh
 
 run:
+	make swg && \
 	go run cmd/main.go
 
 swg:
-	cd ./cmd && \
-	swag init -o ../docs
+	swag init -g ./cmd/main.go -o docs

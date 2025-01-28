@@ -1,4 +1,78 @@
+basePath: /api/v1
+definitions:
+  handlers.Playbook:
+    properties:
+      name:
+        type: string
+    type: object
+host: localhost:8080
 info:
   contact: {}
-paths: {}
+  description: '...'
+  title: Klambri WebAPI
+  version: "1.0"
+paths:
+  /playbook/delete/name/{name}:
+    delete:
+      description: Delete playbook from the server.
+      parameters:
+      - description: Delete playbook file
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete playbook
+      tags:
+      - Playbook
+  /playbook/getall:
+    get:
+      description: Get all playbooks
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handlers.Playbook'
+            type: array
+      summary: Get all playbooks
+      tags:
+      - Playbook
+  /playbook/upload:
+    post:
+      description: Upload playbook to the server.
+      parameters:
+      - description: Upload playbook file
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Upload playbook
+      tags:
+      - Playbook
 swagger: "2.0"
