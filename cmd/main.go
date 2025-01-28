@@ -18,8 +18,13 @@ func main() {
 	r := gin.Default()
 
 	v1 := r.Group("/api/v1")
+	{
+		//LDAP routes
+		routes.User(v1.Group("/user"))
 
-	routes.SetupRoutes(v1)
+		//Ansible routes
+		routes.Playbook(v1.Group("playbook"))
+	}
 
 	if err := r.Run(fmt.Sprintf(":%v", config.Server.Port)); err != nil {
 		panic(err)
