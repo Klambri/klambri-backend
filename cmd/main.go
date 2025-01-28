@@ -7,6 +7,10 @@ import (
 	"github.com/Klambri/klambri-backend/internal/configuration"
 	"github.com/Klambri/klambri-backend/internal/routes"
 	"github.com/gin-gonic/gin"
+
+	docs "github.com/Klambri/klambri-backend/docs"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func main() {
@@ -17,6 +21,8 @@ func main() {
 
 	r := gin.Default()
 
+	docs.SwaggerInfo.BasePath = "/api/v1"
+
 	v1 := r.Group("/api/v1")
 	{
 		//LDAP routes
@@ -25,6 +31,8 @@ func main() {
 		//Ansible routes
 		routes.Playbook(v1.Group("playbook"))
 	}
+
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	if err := r.Run(fmt.Sprintf(":%v", config.Server.Port)); err != nil {
 		panic(err)
