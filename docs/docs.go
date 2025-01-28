@@ -14,17 +14,124 @@ const docTemplate = `{
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {}
+    "paths": {
+        "/playbook/delete/name/{name}": {
+            "delete": {
+                "description": "Delete playbook from the server.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Playbook"
+                ],
+                "summary": "Delete playbook",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Delete playbook file",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/playbook/getall": {
+            "get": {
+                "description": "Get all playbooks",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Playbook"
+                ],
+                "summary": "Get all playbooks",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/handlers.Playbook"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/playbook/upload": {
+            "post": {
+                "description": "Upload playbook to the server.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Playbook"
+                ],
+                "summary": "Upload playbook",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "Upload playbook file",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "handlers.Playbook": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        }
+    }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
+	Version:          "1.0",
+	Host:             "localhost:8080",
+	BasePath:         "/api/v1",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Title:            "Klambri WebAPI",
+	Description:      "...",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",
