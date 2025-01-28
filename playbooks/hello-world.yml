@@ -1,0 +1,11 @@
+---
+- name: Test Playbook
+  hosts: all
+  tasks:
+    - name: Run a simple command
+      command: echo "Hello, World!"
+      register: result
+
+    - name: Show the output
+      debug:
+        msg: "{{ result.stdout }}"
