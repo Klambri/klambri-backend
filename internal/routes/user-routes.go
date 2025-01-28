@@ -5,12 +5,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func userRoutes(rg *gin.RouterGroup) {
-	userGroup := rg.Group("/users")
-	{
-		userGroup.GET("/", handlers.GetUsers)
-		userGroup.POST("/", handlers.DeleteUser)
-		userGroup.DELETE("/", handlers.DeleteUser)
-		userGroup.PUT("/", handlers.DeleteUser)
-	}
+func User(rg *gin.RouterGroup) {
+	rg.GET("/", handlers.GetUsers)
+	rg.POST("/", handlers.DeleteUser)
+	rg.DELETE("/", handlers.DeleteUser)
+	rg.PUT("/", handlers.DeleteUser)
 }
